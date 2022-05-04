@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
-import axios from "axios";
+
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -13,38 +13,39 @@ const HomePage = () => {
   const [projectData, setProjectData] =useState()
 
   useEffect(() => {
-    getAllProjects()
+    const getAllProjects = async () => {
+      try {
+        let response = await axios.get("http://127.0.0.1:8000/api/projects", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setProjectData(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getAllProjects();
     
   }, [token]);
 
-  async function getAllProjects(){
-    let res = await axios.get('http://127.0.0.1:8000/api/projects');
-    setProjectData(res.data.items);
-  }
+  // async function getAllProjects(){
+  //   let res = await axios.get('http://127.0.0.1:8000/api/projects');
+  //   setProjectData(res.data.items);
+  // }
 
 
   return (
     <div className="container">
-     {projectData.map((element, index)=>{
-       if (element.author === user.id){
-         
-       }
-     })}
+      <div>{projectData}</div>
     </div>
   );
 };
 
 export default HomePage;
-// const fetchCars = async () => {
-//   try {
-//     let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//     });
-//     setCars(response.data);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-// fetchCars();
+ {/* {projectData.map((element, index)=>{
+       if (element.author === user.id){
+
+       }
+     })} */}
