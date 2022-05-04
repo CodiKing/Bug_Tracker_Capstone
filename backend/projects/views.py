@@ -22,3 +22,17 @@ def projects_list(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET','PUT','DELETE'])
+def projects_detail(request, pk):
+    project=get_object_or_404(Projects, pk=pk)
+    if request.method=='GET':
+        serializer=ProjectsSerializer(project)
+        return Response(serializer.data)
+    elif request.method=='PUT':
+        serializer=ProjectsSerializer(project, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method=='DELETE':
+        project.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
