@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Projects
+from authentication.models import User
 from .serializers import ProjectsSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
@@ -13,7 +14,7 @@ def projects_list(request):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'GET':
-        projects = Projects.objects.filter(user_id=request.user.id)
+        projects = Projects.objects.filter(user=request.user.id)
         serializer = ProjectsSerializer(projects, many=True)
         return Response(serializer.data)
 
@@ -43,3 +44,12 @@ def projects_detail(request, pk):
     elif request.method=='DELETE':
         project.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def add_member(request, project_id, member_id):
+    project=get_object_or_404(Projects, pk=project_id)
+    new_member = get_object_or_404(User, pk=member_id)
+    project.assigned_members.add(new_member)
+    return Response(status=status.HTTP_200_OK)
+    # save?
