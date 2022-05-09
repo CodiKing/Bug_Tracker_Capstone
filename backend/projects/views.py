@@ -5,8 +5,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Projects
 from authentication.models import User
+from authentication.serializers import RegistrationSerializer
 from .serializers import ProjectsSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
+
 
 @api_view (['GET','POST'])
 @permission_classes([IsAuthenticated])
@@ -53,3 +55,12 @@ def add_member(request, project_id, member_id):
     project.assigned_members.add(new_member)
     return Response(status=status.HTTP_200_OK)
     # save?
+
+@api_view(['GET'])
+def get_Users(request):
+    # print(
+    #     'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+
+    users = User.objects.all()
+    serializer = RegistrationSerializer(users, many=True)
+    return Response(serializer.data)
