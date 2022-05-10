@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import ProjectPage from "./pages/ProjectPage/ProjectPage";
 
 
 // Component Imports
@@ -33,6 +34,8 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/ProjectPage" element={<ProjectPage />} />
+
       </Routes>
       <Footer />
     </div>

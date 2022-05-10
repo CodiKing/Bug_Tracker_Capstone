@@ -5,6 +5,8 @@ import axios from "axios";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from "../../components/Modal/Modal";
+import '../../add_New_Project'
+import { Link, Route, useNavigate } from "react-router-dom";
 
 
 
@@ -15,59 +17,95 @@ const HomePage = (props) => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
  
   const [user, token] = useAuth();
+  const [allUsers, setGetAllUsers] =useState([])
   const [projectData, setProjectData] = useState([])
-  const [newProject, setNewProject] = useState()
+  const[selectedProject,setSelectedProject] = useState()
   const[openModal,setOpenModal]= useState(false)
-
+  
   useEffect(() => {
-    const getAllProjects = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/projects/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setProjectData(response.data);
-        console.log(response.data)
-      } catch (error) {
-        console.log(error.message, "Try Again");
-      }
-    };
     getAllProjects()
     
   }, [token]);
 
-  async function createNewProject(){
+  const getAllProjects = async () => {
     try {
-      let response = await axios.post('http://127.0.0.1:8000/api/projects/', {
+      let response = await axios.get("http://127.0.0.1:8000/api/projects/", {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: "Bearer " + token,
         },
-      })
-
+      });
+      setProjectData(response.data);
+      console.log(response.data)
     } catch (error) {
-      console.log(error.message, 'Try Again');
+      console.log(error.message, "Try Again");
     }
   };
 
+  async function createNewProject(newProject){
+    try {
+      let response = await axios.post('http://127.0.0.1:8000/api/projects/', newProject,  {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      }) 
+      if(response.status===201)
+      await getAllProjects();
 
+    } catch (error) {
+      console.log(error.message, 'Try Again');
+      console.log(newProject)
+    }
+  };
+
+  async function getProjectById(id){
+    try{
+    let response = await axios.get(`http://127.0.0.1:8000/api/projects/${id}/`,{
+      headers: {
+        Authorization: 'Bearer ' + token,
+     },
+     
+    })
+    setSelectedProject(response.data)
+    console.log(response.data)
+  
+  } catch (error){ 
+    console.log(error.message)
+  }
+  
+};
+  function NavigateData() {
+    const navigate = useNavigate();
+  
+ 
+    function handleClick(id){
+    getProjectById(id)
+    navigate('/Projectpage')
+    }
+  
+  
 
   return (
     <div>
       <h1> Welcome {user.username}!</h1>
       
-      <div className="container">
+     <div>
       <Button onClick={()=>{setOpenModal(true)}} >
         Add New Project
       </Button>
-     {openModal && <Modal closeModal={setOpenModal}/>}
+     {openModal && <Modal closeModal={setOpenModal} createNewProject={createNewProject}/>}
       <Col>
+      <div className="container">
         <div className="col-md-12">Current Projects</div>
         <div>{projectData.map((element)=>{
           return (
-            <h2>{element.description}</h2>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
+              </a>
+              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}}>{element.title}</a>
+            </div>
           )
         })};
+        </div>
         </div>
         </Col>
          
