@@ -21,10 +21,11 @@ const HomePage = (props) => {
   const [projectData, setProjectData] = useState([])
   const[selectedProject,setSelectedProject] = useState()
   const[openModal,setOpenModal]= useState(false)
-  
+  const navigate = useNavigate();
+  console.log(selectedProject)
   useEffect(() => {
     getAllProjects()
-    
+   
   }, [token]);
 
   const getAllProjects = async () => {
@@ -57,26 +58,22 @@ const HomePage = (props) => {
     }
   };
 
-  async function getProjectById(id){
+  const getProjectById=async(id)=>{
     try{
     let response = await axios.get(`http://127.0.0.1:8000/api/projects/${id}/`,{
       headers: {
         Authorization: 'Bearer ' + token,
      },
-     
-    })
-    setSelectedProject(response.data)
+    });
+    setSelectedProject(response.data);
     console.log(response.data)
+    
   
   } catch (error){ 
     console.log(error.message)
   }
   
 };
-  function NavigateData() {
-    const navigate = useNavigate();
-  
- 
     function handleClick(id){
     getProjectById(id)
     navigate('/Projectpage')
@@ -101,7 +98,7 @@ const HomePage = (props) => {
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
               </a>
-              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}}>{element.title}</a>
+              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} selectedProject={selectedProject}>{element.title}</a>
             </div>
           )
         })};

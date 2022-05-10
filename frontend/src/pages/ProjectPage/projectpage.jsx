@@ -6,8 +6,11 @@ const projectPage = (props) => {
 
 
     return (
+      <div className='container-fluid'>
+        <div>{props.selectedProject.title}</div>
+      </div>
 
-        console.log('We got here')
+        
 
       );
 }
