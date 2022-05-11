@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -18,7 +19,7 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
-
+  const [selectedProject, setSelectedProject] = useState([])
 
   return (
     <div>
@@ -28,13 +29,13 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <HomePage setSelectedProject={setSelectedProject} />
             </PrivateRoute>
           }
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/ProjectPage" element={<ProjectPage />} />
+        <Route path="/ProjectPage" element={<ProjectPage selectedProject={selectedProject} />} />
 
       </Routes>
       <Footer />

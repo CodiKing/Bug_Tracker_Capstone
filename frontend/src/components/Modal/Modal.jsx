@@ -25,7 +25,7 @@ function Modal(props) {
             comments:comments,
             status:status,   
             tasks:tasks,
-    
+                
         };
         props.createNewProject(newProject)
       };

@@ -19,13 +19,15 @@ const HomePage = (props) => {
   const [user, token] = useAuth();
   const [allUsers, setGetAllUsers] =useState([])
   const [projectData, setProjectData] = useState([])
-  const[selectedProject,setSelectedProject] = useState()
+  const [taskData, setTaskData] = useState([])
   const[openModal,setOpenModal]= useState(false)
   const navigate = useNavigate();
-  console.log(selectedProject)
+  
+
+
   useEffect(() => {
     getAllProjects()
-   
+    getAllTasks()
   }, [token]);
 
   const getAllProjects = async () => {
@@ -65,7 +67,7 @@ const HomePage = (props) => {
         Authorization: 'Bearer ' + token,
      },
     });
-    setSelectedProject(response.data);
+    props.setSelectedProject(response.data);
     console.log(response.data)
     
   
@@ -73,6 +75,19 @@ const HomePage = (props) => {
     console.log(error.message)
   }
   
+};
+const getAllTasks = async () => {
+  try {
+    let response = await axios.get("http://127.0.0.1:8000/api/projects/tasks/", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    setTaskData(response.data);
+    console.log(response.data)
+  } catch (error) {
+    console.log(error.message, "Try Again");
+  }
 };
     function handleClick(id){
     getProjectById(id)
@@ -92,16 +107,24 @@ const HomePage = (props) => {
      {openModal && <Modal closeModal={setOpenModal} createNewProject={createNewProject}/>}
       <Col>
       <div className="container">
-        <div className="col-md-12">Current Projects</div>
+        <div className="col-md-12">Current Projects
         <div>{projectData.map((element)=>{
           return (
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
               </a>
-              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} selectedProject={selectedProject}>{element.title}</a>
+              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} >{element.title}</a>
             </div>
+            
           )
         })};
+        </div>
+        <div className="conatiner">
+          <div className="col-md-12">
+            {/* <div>{taskData.map((element)=>{
+              if(</div> */}
+          </div>
+        </div>
         </div>
         </div>
         </Col>
