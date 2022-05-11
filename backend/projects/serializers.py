@@ -1,5 +1,6 @@
+from asyncio import Task
 from rest_framework import serializers
-from .models import Projects
+from .models import Projects, Tasks
 
 
 class ProjectsSerializer(serializers.ModelSerializer):
@@ -7,6 +8,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
         model = Projects
         fields = ['id', 'title', 'description', 'priority', 'deadline', 'status', 'assigned_members', 'user', 'tasks', 'comments', 'created_date', 'updated_date']
  
-    # assigned_members = serializers.IntegerField(read_only=True)
-   
-    
+class TasksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tasks
+        fields = ['id', 'taskTitle', 'taskDescription', 'taskPriority', 'taskStatus', 'assigned_members', 'created_date', 'updated_date']
