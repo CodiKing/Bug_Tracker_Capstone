@@ -5,9 +5,8 @@ import axios from "axios";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from "../../components/Modal/Modal";
-import '../../add_New_Project'
 import { Link, Route, useNavigate } from "react-router-dom";
-
+import './HomePage.css'
 
 
 
@@ -106,7 +105,8 @@ const getAllTasks = async () => {
       </Button>
      {openModal && <Modal closeModal={setOpenModal} createNewProject={createNewProject}/>}
       <Col>
-      <div className="container">
+      <div className="container" style={{
+      }}>
         <div className="col-md-12">Current Projects
         <div>{projectData.map((element)=>{
           return (
@@ -115,14 +115,22 @@ const getAllTasks = async () => {
               </a>
               <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} >{element.title}</a>
             </div>
-            
           )
         })};
         </div>
+        
         <div className="conatiner">
           <div className="col-md-12">
-            {/* <div>{taskData.map((element)=>{
-              if(</div> */}
+            <div>{taskData.map((element)=>{
+              
+              return(
+              <div class="list-group"> Tasks
+              <a href="#" class="list-group-item list-group-item-action active">Task : {element.taskTitle}
+              </a>
+              </div>
+              )
+            })};
+                </div>
           </div>
         </div>
         </div>

@@ -19,7 +19,7 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
-  const [selectedProject, setSelectedProject] = useState([])
+  const [selectedProject, setSelectedProject] = useState({})
 
   return (
     <div>

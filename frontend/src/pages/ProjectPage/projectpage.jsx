@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../HomePage/HomePage";
 import TaskModal from "../../components/Modal/TaskModal";
 import useAuth from "../../hooks/useAuth";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProjectPage = (props) => {
   const [user, token] = useAuth();
   const[openTaskModal,setOpenTaskModal]= useState(false)
-  console.log(props.selectedProject.id)
+  const[allUsers,setAllUsers] = useState([])
+
+  useEffect(() => {
+    getAllUsers()
+  
+  
+  }, [])
+  
+  
   async function createNewTask(newTask,){
     try {
       let response = await axios.post('http://127.0.0.1:8000/api/projects/tasks/', newTask, {
@@ -24,8 +33,19 @@ const ProjectPage = (props) => {
     }
   };
 
+  const getAllUsers = async ()=>{
+    try{
+      let response = await axios.get('127.0.0.1:8000/api/projects/otherUsers/');
+        setAllUsers(response.data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  };
+
+  
 
     return (
+      
       <div className='container-fluid'>
         <div className="card">
           <form>
@@ -58,7 +78,12 @@ const ProjectPage = (props) => {
             <div class="row gx-md-8">
           <div class="col-md-4">
             <h5>Tasks</h5>
-            <p class="text-muted">{props.selectedProject.tasks}</p>
+            <div class="text-muted">{props.selectedProject.tasks_set.map((element)=>{
+              return(
+                <div>{element.taskTitle}</div>
+              
+              )
+            })}</div>
             </div>
             <div class="row gx-md-8">
           <div class="col-md-4">

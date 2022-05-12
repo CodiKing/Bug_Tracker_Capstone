@@ -2,21 +2,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Modal.css';
 import React, {useState, useEffect} from 'react';
-import '../../add_New_Project'
 
 
 function TaskModal(props) {
   
-    const[taskTitle,setTaskTitle]=useState();
+    const[taskTitle,setTaskTitle]=useState('');
     const[taskDescription,setTaskDescription]=useState();
     const[taskPriority,setTaskPriority]=useState();
     const[taskStatus,setTaskStatus]=useState();
     const[selectedProjectId, setselectedProjectId]=useState();
-    console.log(selectedProjectId)
+ 
     
-    useEffect=()=>{
-        setselectedProjectId(props.selectedProject.id)
-    }
+    useEffect(()=>{
+        setselectedProjectId(props.selectedProjectId)
+    },[]);
     
     function handleSubmit(){
         let newTask = {
@@ -24,9 +23,9 @@ function TaskModal(props) {
             taskDescription:taskDescription,
             taskPriority:taskPriority,
             taskStatus:taskStatus,   
-            selectedProjectId:selectedProjectId,
+            projects:selectedProjectId,
                 
-        };
+        }; console.log(newTask)
         props.createNewTask(newTask)
       };
 
@@ -35,6 +34,7 @@ function TaskModal(props) {
     <div class='modalBackground'>
         <div className='modalContainer'>
         <div className='titleCloseButton'>
+            {console.log(props)}
             <button onClick={()=>props.closeTaskModal(false)}> X </button>
             </div>
             <div className='Title'></div>

@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Modal.css';
 import React, {useState} from 'react';
-import '../../add_New_Project'
+
 
 
 function Modal(props) {
