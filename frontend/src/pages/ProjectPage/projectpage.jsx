@@ -9,7 +9,7 @@ const ProjectPage = (props) => {
   const [user, token] = useAuth();
   const[openTaskModal,setOpenTaskModal]= useState(false)
   const[allUsers,setAllUsers] = useState([])
-
+  console.log(props.selectedProject)
   useEffect(() => {
     getAllUsers()
   
@@ -33,17 +33,40 @@ const ProjectPage = (props) => {
     }
   };
 
-  const getAllUsers = async ()=>{
+  async function getAllUsers(){
     try{
-      let response = await axios.get('127.0.0.1:8000/api/projects/otherUsers/');
+      let response = await axios.get('http://127.0.0.1:8000/api/projects/otherUsers/',{
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
         setAllUsers(response.data)
+        console.log(response.data)
     } catch (error) {
       console.log(error.message)
     }
   };
+  // function displayTasks(){
+  //   if (!props.props.selectedProject.tasks_set){
+  //     {props.selectedProject.tasks_set.map((element)=>{
+  //       return(
+  //         <div>{element.taskTitle}</div>
+        
+  //       )
+  //     })}
+  // }};
 
+  // function displayAssignedMembers(){
+  //   if (!props.selectedProject.assigned_members){
+  //     {props.selectedProject.assigned_members.map((element)=>{
+  //       return(
+  //         <div>{element.username}</div>
+  //       )
+  //     })}
+  //   }
+  // }
   
-
+console.log(props.selectedProject)
     return (
       
       <div className='container-fluid'>
@@ -81,14 +104,14 @@ const ProjectPage = (props) => {
             <div class="text-muted">{props.selectedProject.tasks_set.map((element)=>{
               return(
                 <div>{element.taskTitle}</div>
-              
               )
-            })}</div>
+            })}
+            </div>
             </div>
             <div class="row gx-md-8">
           <div class="col-md-4">
             <h5>Assigned Members</h5>
-            <p class="text-muted">{props.selectedProject.assigned_Members}</p>
+            {/* <div class="text-muted">{displayAssignedMembers()}</div> */}
             </div>
             </div>
             </div>
@@ -108,7 +131,7 @@ const ProjectPage = (props) => {
           <button type="submit" class="btn btn-primary btn-rounded" onClick={()=>{setOpenTaskModal(true)}}>
           Add Task
         </button>
-        {openTaskModal && <TaskModal closeTaskModal={setOpenTaskModal} createNewTask={createNewTask} selectedProjectId={props.selectedProject.id}/>}
+        {openTaskModal && <TaskModal closeTaskModal={setOpenTaskModal} createNewTask={createNewTask} selectedProjectId={props.selectedProject.id} allUsers={allUsers}/>}
         </div>
       </div>
 

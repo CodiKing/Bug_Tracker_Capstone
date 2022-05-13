@@ -124,9 +124,9 @@ const getAllTasks = async () => {
             <div>{taskData.map((element)=>{
               
               return(
-              <div class="list-group"> Tasks
-              <a href="#" class="list-group-item list-group-item-action active">Task : {element.taskTitle}
-              </a>
+              <div class="container-fluid-md"> Tasks
+              <div class="container-fluid-md">Task : {element.taskTitle}
+              </div>
               </div>
               )
             })};

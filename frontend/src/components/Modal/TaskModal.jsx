@@ -11,10 +11,13 @@ function TaskModal(props) {
     const[taskPriority,setTaskPriority]=useState();
     const[taskStatus,setTaskStatus]=useState();
     const[selectedProjectId, setselectedProjectId]=useState();
- 
+    const[assignedUser, setAssignedUser] = useState([]);
+    const[tempUserData, setTempUserData] = useState();
+
     
     useEffect(()=>{
         setselectedProjectId(props.selectedProjectId)
+
     },[]);
     
     function handleSubmit(){
@@ -24,12 +27,19 @@ function TaskModal(props) {
             taskPriority:taskPriority,
             taskStatus:taskStatus,   
             projects:selectedProjectId,
+            assigned_members:assignedUser,
                 
         }; console.log(newTask)
         props.createNewTask(newTask)
       };
+console.log(assignedUser)
 
-
+      // if (tempUserData){
+      //  let userObject= props.allUsers.filter(element => tempUserData);
+      //   return(
+      //     setAssignedUser(userObject)
+      //   )
+      // };
   return (
     <div class='modalBackground'>
         <div className='modalContainer'>
@@ -48,6 +58,7 @@ function TaskModal(props) {
                     <option value="Medium">Medium Priority</option>
                     <option value="Low">Low Priority</option>
                   </select>
+                <div className='Footer'></div>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setTaskStatus(event.target.value)}>
                  
                     <option selected>Status of Project/Application</option>
@@ -55,7 +66,19 @@ function TaskModal(props) {
                     <option value="Bad/Not Functional">Bad/Not Functional</option>
                     <option value="Great/Functioning Properly">Great/Functioning Properly</option>
                   </select>
-                <div className='Footer'></div>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
+                <option selected> Assign Member</option>
+                   {props.allUsers.map((element)=>{
+                     console.log(element)
+                  return (
+                    
+                  <option value={element.id}>{element.username}</option>
+                  
+                  );
+                })}
+                 </select>
+                   
+                  
                 <button onClick={()=>props.closeTaskModal(false)}>Cancel</button>
                 <button onClick={()=>handleSubmit()}>Submit</button>
                 </div>
