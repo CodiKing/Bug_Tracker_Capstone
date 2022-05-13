@@ -10,14 +10,14 @@ class Projects(models.Model):
    deadline = models.DateField(null=True, blank=True)
    status = models.CharField(max_length= 500)
    assigned_members = models.ManyToManyField(User, default=None,blank=True)
-   tasks = models.CharField(max_length= 500)
+   # tasks = models.CharField(max_length= 500)
    comments = models.CharField(max_length= 500)
    created_date = models.DateTimeField(auto_now_add=True, blank=True)
    updated_date =models.DateTimeField(auto_now=True, blank=True)
 
 
 class Tasks(models.Model):
-   user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Projects.author+',null=True, blank=True, default=None)
+   user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks.author+',null=True, blank=True, default=None)
    assigned_members = models.ManyToManyField(User, default=None,blank=True)
    taskTitle = models.CharField(max_length=100)
    taskDescription = models.CharField(max_length= 500)
@@ -25,3 +25,4 @@ class Tasks(models.Model):
    taskStatus = models.CharField(max_length= 500)
    created_date = models.DateTimeField(auto_now_add=True, blank=True)
    updated_date =models.DateTimeField(auto_now=True, blank=True)
+   projects =models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True, default=None)
