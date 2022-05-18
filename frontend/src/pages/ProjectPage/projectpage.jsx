@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
 import "../HomePage/HomePage";
 import TaskModal from "../../components/Modal/TaskModal";
 import useAuth from "../../hooks/useAuth";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button} from "react-bootstrap";
+import ReadOnlyProjectPage from './ReadOnlyProjectpage';
+import EditableProjectPage from './EditableProjectPage';
+
+
 
 const ProjectPage = (props) => {
   const [user, token] = useAuth();
   const[openTaskModal,setOpenTaskModal]= useState(false)
   const[allUsers,setAllUsers] = useState([])
+  const[editProjectId, setEditProjectId]= useState(null)
   console.log(props.selectedProject)
+
   useEffect(() => {
     getAllUsers()
-  
-  
+
   }, [])
   
   
@@ -46,93 +52,73 @@ const ProjectPage = (props) => {
       console.log(error.message)
     }
   };
-  // function displayTasks(){
-  //   if (!props.props.selectedProject.tasks_set){
-  //     {props.selectedProject.tasks_set.map((element)=>{
-  //       return(
-  //         <div>{element.taskTitle}</div>
-        
-  //       )
-  //     })}
-  // }};
+  function handleClick(e){
+    e.preventDefault()
+    setOpenTaskModal(true)
+  };
 
-  // function displayAssignedMembers(){
-  //   if (!props.selectedProject.assigned_members){
-  //     {props.selectedProject.assigned_members.map((element)=>{
-  //       return(
-  //         <div>{element.username}</div>
-  //       )
-  //     })}
-  //   }
-  // }
+  const handleEditClick = (event) => {
+    event.preventDefault();
+    setEditProjectId(props.selectedProjectId);
+
+  }
+ 
   
-console.log(props.selectedProject)
-    return (
-      
-      <div className='container-fluid'>
-        <div className="card">
-          <form>
-          <div class="card-header py-4 px-5 bg-light border-0">
-            <h4 class="mb-0 fw-bold">{props.selectedProject.title}</h4>
-          </div>
-          <div class="card-body px-5">
 
-          {/* -- Body -- */}
-          <div class="row gx-xl-6">
-          <div class="col-md-4">
-            <h5>Project Description</h5>
-            <p class="text-muted">{props.selectedProject.title}</p>
-            </div>
-          <div class="row gx-md-8">
-          <div class="col-md-4">
-            <h5>Priority</h5>
-            <p class="text-muted">{props.selectedProject.priority}</p>
-            </div>
-          <div class="row gx-md-8">
-          <div class="col-md-4">
-            <h5>Status</h5>
-            <p class="text-muted">{props.selectedProject.status}</p>
-            </div>
-          <div class="row gx-md-8">
-          <div class="col-md-4">
-            <h5>Deadline</h5>
-            <p class="text-muted">{props.selectedProject.deadline}</p>
-            </div>
-            <div class="row gx-md-8">
-          <div class="col-md-4">
-            <h5>Tasks</h5>
-            <div class="text-muted">{props.selectedProject.tasks_set.map((element)=>{
+
+//   async function addMemberToProject(props.selectedProjectId, selectedMemberId){
+//     try{
+//       let response = await axios.patch(`http://127.0.0.1:8000/api/projects/add/${props.selectedProjectId}/add_member/${selectedMemberId}/`, {
+//       headers: {
+//         Authorization: 'Bearer ' + token,
+//       },
+//     });
+//   }catch (error){
+//     console.log(error.message)
+//   }
+// };
+
+
+    return (
+      <div>
+        <form>
+        <Fragment>{ editProjectId === props.selectedProjectId ? <EditableProjectPage selectedProject={props.selectedProject} /> :  <ReadOnlyProjectPage selectedProject={props.selectedProject} handleEditClick={handleEditClick}/> }
+       
+        </Fragment>
+      
+        <div className='container-fluid'>
+        <div className="card">
+          
+          <div className="card-header py-4 px-5 bg-light border-0">
+            
+          <Button type="submit" className="btn btn-primary btn-rounded" onClick={(e)=> handleClick(e)}>
+          Add Task
+        </Button>
+          {openTaskModal && <TaskModal closeTaskModal={setOpenTaskModal} createNewTask={createNewTask} selectedProjectId={props.selectedProject.id} allUsers={allUsers} />}
+        <h4 className="mb-0 fw-bold">Project Tasks</h4>
+        <div className="col-md-4">
+            <div className="text-muted"> {props.selectedProject.tasks_set && props.selectedProject.tasks_set.map((element)=>{
               return(
-                <div>{element.taskTitle}</div>
+                <div class="row-md-4">
+                  <h5>Task Title</h5>
+              <div key={element.id}>{element.taskTitle}</div>
+              <h5>Task Description</h5>
+              <div>{element.taskDescription}</div>
+              <h5>Task Priority</h5>
+              <div>{element.taskPriority}</div>
+              <h5>Task Status</h5>
+              <div>{element.taskStatus}</div>
+              </div>
+              
               )
             })}
             </div>
             </div>
-            <div class="row gx-md-8">
-          <div class="col-md-4">
-            <h5>Assigned Members</h5>
-            {/* <div class="text-muted">{displayAssignedMembers()}</div> */}
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-          </div>
-          {/* -- Footer-- */}
-          <div class="card-footer text-end py-4 px-5 bg-light border-0">
-        <button class="btn btn-link btn-rounded" data-ripple-color="primary">Edit</button>
         </div>
-          </form>
-          
+        
         </div>
-        <div className='container-fluid'>
-          <button type="submit" class="btn btn-primary btn-rounded" onClick={()=>{setOpenTaskModal(true)}}>
-          Add Task
-        </button>
-        {openTaskModal && <TaskModal closeTaskModal={setOpenTaskModal} createNewTask={createNewTask} selectedProjectId={props.selectedProject.id} allUsers={allUsers}/>}
         </div>
+        </form>
       </div>
 
         

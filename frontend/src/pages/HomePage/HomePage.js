@@ -107,20 +107,20 @@ const getAllTasks = async () => {
       <Col>
       <div className="container" style={{
       }}>
-        <div className="col-md-12">Current Projects
+        <div className="col-md-6">Current Projects
         <div>{projectData.map((element)=>{
           return (
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
+              <a class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
               </a>
-              <a href="#" class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} >{element.title}</a>
+              <a class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} >{element.title}</a>
             </div>
           )
         })};
         </div>
         
         <div className="conatiner">
-          <div className="col-md-12">
+          <div className="col-md-6">
             <div>{taskData.map((element)=>{
               
               return(

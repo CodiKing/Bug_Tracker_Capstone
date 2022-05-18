@@ -7,16 +7,17 @@ import React, {useState, useEffect} from 'react';
 function TaskModal(props) {
   
     const[taskTitle,setTaskTitle]=useState('');
-    const[taskDescription,setTaskDescription]=useState();
-    const[taskPriority,setTaskPriority]=useState();
-    const[taskStatus,setTaskStatus]=useState();
+    const[taskDescription,setTaskDescription]=useState('');
+    const[taskPriority,setTaskPriority]=useState('');
+    const[taskStatus,setTaskStatus]=useState('');
     const[selectedProjectId, setselectedProjectId]=useState();
     const[assignedUser, setAssignedUser] = useState([]);
-    const[tempUserData, setTempUserData] = useState();
+
 
     
     useEffect(()=>{
         setselectedProjectId(props.selectedProjectId)
+       
 
     },[]);
     
@@ -34,18 +35,12 @@ function TaskModal(props) {
       };
 console.log(assignedUser)
 
-      // if (tempUserData){
-      //  let userObject= props.allUsers.filter(element => tempUserData);
-      //   return(
-      //     setAssignedUser(userObject)
-      //   )
-      // };
   return (
     <div class='modalBackground'>
         <div className='modalContainer'>
         <div className='titleCloseButton'>
             {console.log(props)}
-            <button onClick={()=>props.closeTaskModal(false)}> X </button>
+            <button onClick={()=>props.closeTaskModal(false)} > X </button>
             </div>
             <div className='Title'></div>
                 <h2>New Task</h2>
@@ -66,17 +61,17 @@ console.log(assignedUser)
                     <option value="Bad/Not Functional">Bad/Not Functional</option>
                     <option value="Great/Functioning Properly">Great/Functioning Properly</option>
                   </select>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
+                {/* <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
                 <option selected> Assign Member</option>
-                   {props.allUsers.map((element)=>{
+                   {props.allUsers && props.allUsers.map((element)=>{
                      console.log(element)
                   return (
                     
-                  <option value={element.id}>{element.username}</option>
+                  <option value={[element]}>{element.username}</option>
                   
                   );
                 })}
-                 </select>
+                 </select> */}
                    
                   
                 <button onClick={()=>props.closeTaskModal(false)}>Cancel</button>
