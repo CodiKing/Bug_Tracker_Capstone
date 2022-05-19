@@ -49,7 +49,7 @@ def projects_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['PATCH'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def add_member(request, project_id, member_id):
     project=get_object_or_404(Projects, pk=project_id)
     new_member = get_object_or_404(User, pk=member_id)
@@ -60,9 +60,6 @@ def add_member(request, project_id, member_id):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_Users(request):
-    # print(
-    #     'User ', f"{request.user.id} {request.user.email} {request.user.username}")
-
     users = User.objects.all()
     serializer = GetAllUsersSerializer(users, many=True)
     return Response(serializer.data)
@@ -86,3 +83,11 @@ def tasks_list(request):
 
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PATCH'])
+# @permission_classes([IsAuthenticated])
+def add_MemberToTask(request, tasks_id, member_id):
+    task=get_object_or_404(Tasks, pk=tasks_id)
+    new_member = get_object_or_404(User, pk=member_id)
+    task.assigned_members.add(new_member)
+    return Response(status=status.HTTP_200_OK)

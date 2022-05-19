@@ -10,8 +10,6 @@ class Projects(models.Model):
    deadline = models.DateField(null=True, blank=True)
    status = models.CharField(max_length= 500)
    assigned_members = models.ManyToManyField(User, default=None,blank=True)
-   # tasks = models.CharField(max_length= 500)
-   comments = models.CharField(max_length= 500)
    created_date = models.DateTimeField(auto_now_add=True, blank=True)
    updated_date =models.DateTimeField(auto_now=True, blank=True)
 

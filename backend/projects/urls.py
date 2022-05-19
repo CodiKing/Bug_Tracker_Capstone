@@ -7,5 +7,6 @@ urlpatterns = [
     path('<int:pk>/',views.projects_detail),
     path('add/<int:project_id>/add_member/<int:member_id>/', views.add_member),
     path('otherUsers/',views.get_Users),
-    path('tasks/',views.tasks_list)
+    path('tasks/',views.tasks_list),
+    path('add/<int:tasks_id>/add_member/<int:member_id>/', views.add_MemberToTask)
 ]
