@@ -1,7 +1,9 @@
 import React from 'react';
+import { Button} from "react-bootstrap";
+
+const ReadOnlyProjectPage = (props) => {
 
 
-const ReadOnlyProjectPage = (props, {handleEditClick}) => {
     return ( 
         
         <div className='container-fluid'>
@@ -53,7 +55,9 @@ const ReadOnlyProjectPage = (props, {handleEditClick}) => {
           </div>
           {/* -- Footer-- */}
           <div className="card-footer text-end py-4 px-5 bg-light border-0">
-        <button className="btn btn-link btn-rounded" data-ripple-color="primary" type='button' onClick={(event)=> props.handleEditClick(event)}>Edit</button>
+        <Button className="btn btn-link btn-rounded"  type='button' onClick={(event)=> props.handleEditClick(event)}>Edit</Button>
+        
+        
         </div>
           </form>
           

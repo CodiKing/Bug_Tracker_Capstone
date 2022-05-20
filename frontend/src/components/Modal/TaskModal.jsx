@@ -1,6 +1,6 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Modal.css';
+import './TaskModal.css';
 import React, {useState, useEffect} from 'react';
 
 
@@ -11,7 +11,7 @@ function TaskModal(props) {
     const[taskPriority,setTaskPriority]=useState('');
     const[taskStatus,setTaskStatus]=useState('');
     const[selectedProjectId, setselectedProjectId]=useState();
-    const[assignedUser, setAssignedUser] = useState([]);
+    console.log(selectedProjectId)
 
 
     
@@ -28,12 +28,12 @@ function TaskModal(props) {
             taskPriority:taskPriority,
             taskStatus:taskStatus,   
             projects:selectedProjectId,
-            assigned_members:assignedUser,
+            
                 
         }; console.log(newTask)
         props.createNewTask(newTask)
       };
-console.log(assignedUser)
+
 
   return (
     <div class='modalBackground'>
@@ -61,19 +61,6 @@ console.log(assignedUser)
                     <option value="Bad/Not Functional">Bad/Not Functional</option>
                     <option value="Great/Functioning Properly">Great/Functioning Properly</option>
                   </select>
-                {/* <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
-                <option selected> Assign Member</option>
-                   {props.allUsers && props.allUsers.map((element)=>{
-                     console.log(element)
-                  return (
-                    
-                  <option value={[element]}>{element.username}</option>
-                  
-                  );
-                })}
-                 </select> */}
-                   
-                  
                 <button onClick={()=>props.closeTaskModal(false)}>Cancel</button>
                 <button onClick={()=>handleSubmit()}>Submit</button>
                 </div>

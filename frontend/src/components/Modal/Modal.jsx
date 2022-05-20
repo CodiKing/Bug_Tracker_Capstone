@@ -52,8 +52,6 @@ function Modal(props) {
                     <option value="Bad/Not Functional">Bad/Not Functional</option>
                     <option value="Great/Functioning Properly">Great/Functioning Properly</option>
                   </select>
-                  {/* <input type="text" class="form-control" id="tasks" placeholder="First Task" required="" onChange={(event)=>setTasks(event.target.value)}></input> */}
-                  {/* <input type="text" class="form-control" id="comments" placeholder="Comments" required="" onChange={(event)=>setComments(event.target.value)}></input> */}
                   <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker" inline="true">
                     <input placeholder="Select Deadline" type="date" id="example" class="form-control" onChange={(event)=>setDeadline(event.target.value)}></input>
                     <label for="example"></label>
