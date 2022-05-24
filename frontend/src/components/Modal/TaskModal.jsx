@@ -22,6 +22,7 @@ function TaskModal(props) {
     },[]);
     
     function handleSubmit(){
+      debugger;
         let newTask = {
             taskTitle:taskTitle,
             taskDescription:taskDescription,

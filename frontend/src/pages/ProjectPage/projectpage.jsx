@@ -98,7 +98,7 @@ const ProjectPage = (props) => {
 };
 async function addMemberToTask(assignedUser,assignedTaskId){
   try{
-    let response = await axios.patch(`http://127.0.0.1:8000/api/projects/add/${assignedTaskId}/add_member/${assignedUser}/`, {
+    let response = await axios.patch(`http://127.0.0.1:8000/api/projects/add/${assignedTaskId}/add_members/${assignedUser}/`, {
     headers: {
       Authorization: 'Bearer ' + token,
     },

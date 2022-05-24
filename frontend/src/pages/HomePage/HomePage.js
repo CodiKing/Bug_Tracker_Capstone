@@ -2,12 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from "../../components/Modal/Modal";
-import { Link, Route, useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import './HomePage.css'
-
+import moment from "moment";
+import ProjectTable from './ProjectTable'
 
 
 
@@ -93,8 +94,6 @@ const getAllTasks = async () => {
     navigate('/Projectpage')
     }
   
-  
-
   return (
     <div>
       <h1> Welcome {user.username}!</h1>
@@ -104,47 +103,34 @@ const getAllTasks = async () => {
         Add New Project
       </Button>
      {openModal && <Modal closeModal={setOpenModal} createNewProject={createNewProject}/>}
-      <Col>
-      <div className="container" style={{
-      }}>
-        <div className="col-md-6">Current Projects
-        <div>{projectData.map((element)=>{
-          return (
-            <div class="list-group">
-              <a class="list-group-item list-group-item-action active">Project Priority Level : {element.priority}
-              </a>
-              <a class="list-group-item list-group-item-action" onClick={()=>{handleClick(element.id)}} >{element.title}</a>
-            </div>
-          )
-        })};
-        </div>
-        
-        <div className="conatiner">
-          <div className="col-md-6">
-            <div>{taskData.map((element)=>{
-              
-              return(
-              <div class="container-fluid-md"> Tasks
-              <div class="container-fluid-md">Task : {element.taskTitle}
-              </div>
-              </div>
-              )
-            })};
-                </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        </Col>
+      <ProjectTable projectData={projectData} handleClick={handleClick}/>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task Title</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Updated Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskData.map((element, index)=>{
+                    return (
+                      <tr>
+                      <th scope="row">{index +1}</th>
+                      <td>{element.taskTitle}</td>
+                      <td>{element.taskPriority}</td>
+                      <td>{moment(element.created_date).subtract(10, 'days').calendar()}</td>
+                      <td>{moment(element.updated_date).subtract(10, 'days').calendar()}</td>
+                    </tr>
+                    )
+                  })}
+                
+            </tbody>
+          </table>
          
-        </div>
-        <div class="row"></div>
-      
-      
-        
-      
-      
-   
+          </div>
     </div>
   );
 };

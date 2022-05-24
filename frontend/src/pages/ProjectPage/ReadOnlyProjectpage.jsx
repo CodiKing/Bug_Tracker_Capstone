@@ -55,7 +55,7 @@ const ReadOnlyProjectPage = (props) => {
           </div>
           {/* -- Footer-- */}
           <div className="card-footer text-end py-4 px-5 bg-light border-0">
-        <Button className="btn btn-link btn-rounded"  type='button' onClick={(event)=> props.handleEditClick(event)}>Edit</Button>
+        <button className="btn btn-link btn-rounded"  type='button' onClick={(event)=> props.handleEditClick(event)}>Edit</button>
         
         
         </div>
