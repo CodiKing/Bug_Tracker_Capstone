@@ -115,7 +115,7 @@ const getAllTasks = async () => {
               </tr>
             </thead>
             <tbody>
-              {taskData.map((element, index)=>{
+              {taskData && taskData.map((element, index)=>{
                     return (
                       <tr>
                       <th scope="row">{index +1}</th>
