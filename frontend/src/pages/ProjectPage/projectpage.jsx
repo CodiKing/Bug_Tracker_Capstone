@@ -174,9 +174,7 @@ async function addMemberToTask(assignedUser,assignedTaskId){
         </div>
         </div>
         </div>
-        <div className='container-fluid'>
-          <div className="card">
-          <div className="row-md-6">
+        
           <select class="form-select " onChange={(event)=>setAssignedUser(event.target.value)}>
                 <option selected> Assign Member To Task</option>
                    {allUsers && allUsers.map((element)=>{
@@ -198,9 +196,7 @@ async function addMemberToTask(assignedUser,assignedTaskId){
                 })}
                  </select>
                  <Button className="button" onClick={(event)=>addMemberToTask(assignedUser, assignedTaskId)}>Add Member To Task</Button>
-        </div>
-        </div>
-        </div>
+       
       </div>
 
         

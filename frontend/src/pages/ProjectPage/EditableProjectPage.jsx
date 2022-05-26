@@ -46,7 +46,7 @@ const EditableProjectPage = (props, selectedProject) => {
           <div className="row gx-md-8">
           <div className="col-md-4">
             <h5>Priority</h5>
-            <h4><select class="form-select form-select-sm" aria-label=".form-select-sm " placeholder={props.selectedProject.priority}  onChange={(event)=>setPriority(event.target.value)}>
+            <h4><select class="form-select"  placeholder={props.selectedProject.priority}  onChange={(event)=>setPriority(event.target.value)}>
                     <option selected>Priority Level</option>
                     <option value="High">High Priority</option>
                     <option value="Medium">Medium Priority</option>
@@ -56,7 +56,7 @@ const EditableProjectPage = (props, selectedProject) => {
           <div className="row gx-md-8">
           <div className="col-md-4">
             <h5>Status</h5>
-            <h4> <select class="form-select form-select-sm" aria-label=".form-select-sm" placeholder={props.selectedProject.status}  onChange={(event)=>setStatus(event.target.value)}>
+            <h4> <select class="form-select" placeholder={props.selectedProject.status}  onChange={(event)=>setStatus(event.target.value)}>
                  
                  <option selected>Status of Project/Application</option>
                  <option value="Ok/Working Condition">Ok/Working Condition</option>
