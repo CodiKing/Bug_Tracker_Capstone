@@ -1,4 +1,4 @@
-
+import './ProjectPage.css'
 import React, { useState } from 'react';
 
 
@@ -37,12 +37,11 @@ const EditableProjectPage = (props, selectedProject) => {
           <input type='text' required='required' name='title' placeholder={props.selectedProject.title}  onChange={(event)=>setTitle(event.target.value)}></input>
           </div>
           <div className="card-body px-5">
-
           {/* -- Body -- */}
           <div className="row gx-xl-6">
           <div className="col-md-4">
             <h5>Project Description</h5>
-           <h4> <input type='text' required='required'  name='description' placeholder={props.selectedProject.description}  onChange={(event)=>setDescription(event.target.value)}></input></h4>
+           <h4><input type='text' required='required'  name='description' placeholder={props.selectedProject.description}  onChange={(event)=>setDescription(event.target.value)}></input></h4>
             </div>
           <div className="row gx-md-8">
           <div className="col-md-4">

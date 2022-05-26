@@ -39,31 +39,29 @@ function TaskModal(props) {
   return (
     <div class='modalBackground'>
         <div className='modalContainer'>
-        <div className='titleCloseButton'>
             {console.log(props)}
-            <button onClick={()=>props.closeTaskModal(false)} > X </button>
-            </div>
-            <div className='Title'></div>
-                <h2>New Task</h2>
-            <div className='Body'></div>
+            <button className='titleCloseButton' onClick={()=>props.closeTaskModal(false)} > X </button>
+                <h2  className='title'>New Task</h2>
+            <div className='body'>
             <input type="text" class="form-control" id="title" placeholder="Task Title" required="" onChange={(event)=>setTaskTitle(event.target.value)}></input>
             <input type="text" class="form-control" id="description" placeholder="Task Description" required=""onChange={(event)=>setTaskDescription(event.target.value)}></input>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm "onChange={(event)=>setTaskPriority(event.target.value)}>
+                <select class="form-select " onChange={(event)=>setTaskPriority(event.target.value)}>
                     <option selected>Priority Level</option>
                     <option value="High">High Priority</option>
                     <option value="Medium">Medium Priority</option>
                     <option value="Low">Low Priority</option>
                   </select>
                 <div className='Footer'></div>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setTaskStatus(event.target.value)}>
+                <select class="form-select " onChange={(event)=>setTaskStatus(event.target.value)}>
                  
                     <option selected>Status of Project/Application</option>
                     <option value="Ok/Working Condition">Ok/Working Condition</option>
                     <option value="Bad/Not Functional">Bad/Not Functional</option>
                     <option value="Great/Functioning Properly">Great/Functioning Properly</option>
                   </select>
-                <button onClick={()=>props.closeTaskModal(false)}>Cancel</button>
-                <button onClick={()=>handleSubmit()}>Submit</button>
+                <button className='footerCloseButton' onClick={()=>props.closeTaskModal(false)}>Cancel</button>
+                <button className='submitButton'  onClick={()=>handleSubmit()}>Submit</button>
+                </div>
                 </div>
     </div>
   )

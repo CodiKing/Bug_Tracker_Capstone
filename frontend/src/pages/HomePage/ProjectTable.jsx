@@ -37,6 +37,7 @@ const ProjectTable=(props) =>{
       });
     });
     return(
+      <div className = 'container-fluid'>
         <table class="table table-sortable">
         <thead>
           <tr>
@@ -59,14 +60,14 @@ const ProjectTable=(props) =>{
                   <td>{element.priority}</td>
                   <td>{moment(element.created_date).subtract(10, 'days').calendar()}</td>
                   <td>{moment(element.updated_date).subtract(10, 'days').calendar()}</td>
-                  <td><button onClick={()=>{props.handleClick(element.id)}}>View</button></td>
+                  <td><button className='button' onClick={()=>{props.handleClick(element.id)}}>View</button></td>
                 </tr>
                 )
               })}
             
         </tbody>
       </table>
-
+      </div>
     );
 }
 export default ProjectTable

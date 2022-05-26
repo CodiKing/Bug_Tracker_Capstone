@@ -31,21 +31,21 @@ function Modal(props) {
   return (
     <div class='modalBackground'>
         <div class='modalContainer'>
-        <div className='titleCloseButton'>
-            <button onClick={()=>props.closeModal(false)}> X </button>
-            </div>
-            <div className='Title'></div>
-                <h2>New Project</h2>
-            <div className='Body'></div>
+          <div className='closeButtonBorder'>
+        <button className='titleCloseButton' onClick={()=>props.closeModal(false)}> X </button>
+        </div>
+            
+                <h2 className='title'>New Project</h2>
+            <div className='body'>
             <input type="text" class="form-control" id="title" placeholder="Project Title" required="" onChange={(event)=>setTitle(event.target.value)}></input>
             <input type="text" class="form-control" id="description" placeholder="Project Description" required=""onChange={(event)=>setDescription(event.target.value)}></input>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm "onChange={(event)=>setPriority(event.target.value)}>
+                <select class="form-select " onChange={(event)=>setPriority(event.target.value)}>
                     <option selected>Priority Level</option>
                     <option value="High">High Priority</option>
                     <option value="Medium">Medium Priority</option>
                     <option value="Low">Low Priority</option>
                   </select>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setStatus(event.target.value)}>
+                <select class="form-select" onChange={(event)=>setStatus(event.target.value)}>
                  
                     <option selected>Status of Project/Application</option>
                     <option value="Ok/Working Condition">Ok/Working Condition</option>
@@ -57,11 +57,13 @@ function Modal(props) {
                     <label for="example"></label>
                       <i class="fas fa-calendar input-prefix"></i>
                         </div>
+                        </div>
                        
                 
-                <div className='Footer'></div>
-                <button onClick={()=>props.closeModal(false)}>Cancel</button>
-                <button onClick={()=>handleSubmit()}>Submit</button>
+                <div className='Footer'>
+                <button className='footerCloseButton' onClick={()=>props.closeModal(false)}>Cancel</button>
+                <button className='submitButton' onClick={()=>handleSubmit()}>Submit</button>
+                </div>
         </div>
     </div>
   )

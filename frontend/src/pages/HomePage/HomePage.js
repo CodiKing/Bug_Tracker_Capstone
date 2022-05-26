@@ -95,15 +95,17 @@ const getAllTasks = async () => {
     }
   
   return (
-    <div>
-      <h1> Welcome {user.username}!</h1>
-      
+    <div className="background">
+      <h1 className="header"> Welcome {user.username}!</h1>
      <div>
-      <Button onClick={()=>{setOpenModal(true)}} >
-        Add New Project
-      </Button>
+       <h3 className="titles">Projects</h3>
      {openModal && <Modal closeModal={setOpenModal} createNewProject={createNewProject}/>}
       <ProjectTable projectData={projectData} handleClick={handleClick}/>
+      <button className="button" onClick={()=>{setOpenModal(true)}} >
+        Add New Project
+      </button>
+      <h3 className="titles">Tasks</h3>
+      <div className="container-fluid">
           <table class="table">
             <thead>
               <tr>
@@ -129,7 +131,7 @@ const getAllTasks = async () => {
                 
             </tbody>
           </table>
-         
+          </div>
           </div>
     </div>
   );

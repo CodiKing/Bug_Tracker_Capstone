@@ -1,1 +1,41 @@
 
+
+.container-fluid {
+    border-radius: 5px;
+    font-style: italic;
+    margin-bottom: 32px;
+    ;
+}
+
+.background {
+    background-color:rgb(255, 255, 255);
+    
+}
+
+.header {
+    padding: 75px;
+    text-align: center;
+    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+    border-radius: 15px;
+    font-style: italic;
+    font-size: 55px;
+    margin-bottom: 32px;
+   
+}
+
+.button {
+    background-color: #3f87a6;
+    border-color: rgb(138, 190, 211);
+    font-style: italic;
+    border-radius: 15px;
+    margin-bottom: 32px;
+    color: black;
+   
+}
+
+.titles {
+    font-size: 45px;
+    font-style: italic;
+    color: black;
+    margin-left: 50px;
+}

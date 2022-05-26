@@ -9,23 +9,24 @@ li {
 }
 
 .navBar {
-  background: steelblue;
+  background:linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
   box-shadow: 4px 2px 5px gray;
   color: white;
   margin-bottom: 2rem;
   padding: 1.5rem 2rem;
+  border-radius: 15px;
 }
 
 .navBar button {
   background: transparent;
-  border: 2px solid white;
+  border: 2px solid rgb(245, 220, 81);
   color: white;
   padding: 0.4rem 0.5rem;
 }
 
 .navBar button:hover {
   background: white;
-  color: steelblue;
+  color: rgb(66, 148, 216);
   cursor: pointer;
 }
 

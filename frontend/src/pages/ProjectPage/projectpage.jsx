@@ -119,7 +119,7 @@ async function addMemberToTask(assignedUser,assignedTaskId){
         <Fragment>{ editProjectId === props.selectedProjectId ? <EditableProjectPage selectedProject={props.selectedProject} editProject={editProject}/> :  <ReadOnlyProjectPage selectedProject={props.selectedProject} handleEditClick={handleEditClick}/> }
         </Fragment>
         </form>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
+        <select class="form-select " onChange={(event)=>setAssignedUser(event.target.value)}>
                 <option selected> Assign Member To Project</option>
                    {allUsers && allUsers.map((element)=>{
                      console.log(element)
@@ -130,21 +130,19 @@ async function addMemberToTask(assignedUser,assignedTaskId){
                   );
                 })}
                  </select>
-        <Button className="btn btn-primary btn-rounded" onClick={(event)=>addMemberToProject(assignedUser)}>Add Member To Project</Button>
+        <Button className="button" onClick={(event)=>addMemberToProject(assignedUser)}>Add Member To Project</Button>
+
         <div className='container-fluid'>
           <div className="card">
             <div className="card-header py-4 px-5 bg-light border-0">
             <h4 className="mb-0 fw-bold">Project Tasks</h4>
-            <div className="card-body px-5">
+            
           {openTaskModal && <TaskModal closeTaskModal={setOpenTaskModal} createNewTask={createNewTask} selectedProjectId={props.selectedProject.id} allUsers={allUsers} />}
-         
-        
-        <div className="col-md-6">
             <div className="text-muted"> {props.selectedProject.tasks_set && props.selectedProject.tasks_set.map((element)=>{
               return(
                 <div className='container-fluid'>
                   <div className='card'>
-                    <div class="row-md-4">
+                  <div className="card-body px-5">
                       <h5>Task Title</h5>
                   <div key={element.taskTitle}>{element.taskTitle}</div>
                   <h5>Task Description</h5>
@@ -160,27 +158,26 @@ async function addMemberToTask(assignedUser,assignedTaskId){
                     )
                   })}</div>
                   
+                
                   </div>
-                </div>
+              </div>
               </div>
               
               )
             })}
-            <div className="card-footer text-end py-4 px-5 bg-light border-0">
-            <Button type="submit" className="btn btn-primary btn-rounded" onClick={(e)=> handleClick(e)}>
-          Add Task
-        </Button>
+            
+            <Button className="button" onClick={(e)=> handleClick(e)}>
+             Add Task
+            </Button>
             </div>
-            </div>
-            </div>
-        </div>
+        
         </div>
         </div>
         </div>
         <div className='container-fluid'>
           <div className="card">
           <div className="row-md-6">
-        <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedUser(event.target.value)}>
+          <select class="form-select " onChange={(event)=>setAssignedUser(event.target.value)}>
                 <option selected> Assign Member To Task</option>
                    {allUsers && allUsers.map((element)=>{
                      console.log(element)
@@ -191,7 +188,7 @@ async function addMemberToTask(assignedUser,assignedTaskId){
                   );
                 })}
                  </select>
-                 <select class="form-select form-select-sm" aria-label=".form-select-sm" onChange={(event)=>setAssignedTaskId(event.target.value)}>
+                 <select class="form-select" onChange={(event)=>setAssignedTaskId(event.target.value)}>
                 <option selected> Task To Assign</option>
                    {props.selectedProject.tasks_set && props.selectedProject.tasks_set.map((element)=>{
                   return (
@@ -200,7 +197,7 @@ async function addMemberToTask(assignedUser,assignedTaskId){
                   );
                 })}
                  </select>
-                 <Button className="btn btn-primary btn-rounded" onClick={(event)=>addMemberToTask(assignedUser, assignedTaskId)}>Add Member To Task</Button>
+                 <Button className="button" onClick={(event)=>addMemberToTask(assignedUser, assignedTaskId)}>Add Member To Task</Button>
         </div>
         </div>
         </div>

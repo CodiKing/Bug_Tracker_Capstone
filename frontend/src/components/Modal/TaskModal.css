@@ -22,3 +22,17 @@
     align-items: left;
     
 }
+.footerCloseButton {
+
+    justify-content: center;
+    background-color: #3f87a6;
+    color: black;
+    border-radius: 5px;
+}
+
+.submitButton {
+    margin-left: 15px;
+    background-color: #3f87a6;
+    color: black;
+    border-radius: 5px;
+}
