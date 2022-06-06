@@ -1,3 +1,17 @@
 .error {
   color: red;
 }
+
+.container {
+  font-size: 30px;
+  font-style: italic;
+}
+
+.button {
+  background-color: #3f87a6;
+  border-color: rgb(138, 190, 211);
+  font-style: italic;
+  border-radius: 15px;
+  margin: 32px;
+  color: black;
+}
