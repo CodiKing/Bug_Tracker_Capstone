@@ -4,7 +4,7 @@
     border-radius: 5px;
     font-style: italic;
     margin-bottom: 32px;
-    ;
+    font-size: 25px;
 }
 
 .background {
@@ -28,9 +28,10 @@
     border-color: rgb(138, 190, 211);
     font-style: italic;
     border-radius: 15px;
-    margin-bottom: 32px;
+    margin: 32px;
     color: black;
-   
+    
+    
 }
 
 .titles {
